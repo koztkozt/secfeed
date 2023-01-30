@@ -7,12 +7,21 @@ import pickle
 import re
 import sys
 import json
+from pprint import pprint
+from rocketchat_API.rocketchat import RocketChat
+
 
 DB_PATH = "secfeed.db"
 LIST_PARSED_DATA = []
-SLACK_URL = "https://hooks.slack.com/services/XXXXXXX/YYYYYYYYYYY/ZZZZZZZZZZ" # replace this with real slack web hook url
 USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; SAMSUNG SM-G930F Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/4.0 Chrome/44.0.2403.133 Mobile Safari/537.36"
 HEADERS = {"User-Agent": USER_AGENT}
+
+# https://docs.rocket.chat/use-rocket.chat/user-guides/user-panel/managing-your-account/personal-access-token
+userid = '<userid>'
+authtoken ='<token>'
+serverurl = 'https://localhost:3000'
+channel='<channel_name>'
+
 SEC_FEEDS = {
          # Example:
          # "URL TO QUERY TO GET LINKS" : 
@@ -145,8 +154,8 @@ SEC_FEEDS = {
 }
 
 SLEEP_TIME = 60 * 60 * 2 # 2 hours -+ 10-5000 seconds
-IS_TEST_MODE = True
-SHOULD_REPORT = False
+IS_TEST_MODE = False
+SHOULD_REPORT = True
 
 def setup_logger():
     logging.basicConfig(filename="secfeed.log", filemode="w", level=logging.DEBUG)
@@ -159,13 +168,13 @@ def setup_logger():
     root.addHandler(handler)
 
 
-def notify_slack(url):
+def notify_rocketchat(url):
     if SHOULD_REPORT:
-        data = {"text" : url, "unfurl_links": True, "unfurl_media": True}
-        resp = requests.post(SLACK_URL, data=json.dumps(data))
-        logging.debug("Slack responded: '{}'".format(resp.text))
-setup_logger()
+        rocket = RocketChat(user_id= userid, auth_token= authtoken, server_url=serverurl,session=session)
+        resp = rocket.chat_post_message(url, channel=channel).json()
+        logging.debug("rocketchat responded: '{}'".format(resp))
 
+setup_logger()
 
 if not IS_TEST_MODE:
     try:
@@ -180,31 +189,34 @@ if not IS_TEST_MODE:
 while True:
     logging.info("Getting data")
 
-    for sec_feed in SEC_FEEDS:
-        if IS_TEST_MODE:
-            print("--> {}".format(sec_feed))
+    # rocketchat Connection pooling
+    with requests.sessions.Session() as session:
+        for sec_feed in SEC_FEEDS:
+            if IS_TEST_MODE:
+                print("--> {}".format(sec_feed))
 
-        # Prepare
-        url_feed = sec_feed
-        # one keyword must be present
-        base_url, regex_str, keywords = SEC_FEEDS[url_feed]
-        # Get data
-        try:
-            data = requests.get(sec_feed, headers=HEADERS)
-        except Exception as e:
-            continue
-        # Extract
-        extracted_datas = re.findall(regex_str, data.text)
-        for extracted_data in extracted_datas:
-            if not keywords or any([keyword in extracted_data for keyword in keywords]):
-                full_url = base_url + extracted_data
-                if IS_TEST_MODE:
-                    print("  [-] {}".format(full_url))
-                else:
-                    if full_url not in LIST_PARSED_DATA:
-                        logging.info("Saving new url, and notifying slack: '{}'".format(full_url))
-                        LIST_PARSED_DATA.append(full_url)
-                        notify_slack(full_url)
+            # Prepare
+            url_feed = sec_feed
+            # one keyword must be present
+            base_url, regex_str, keywords = SEC_FEEDS[url_feed]
+            # Get data
+            try:
+                data = requests.get(sec_feed, headers=HEADERS)
+            except Exception as e:
+                continue
+            # Extract
+            extracted_datas = re.findall(regex_str, data.text)
+            for extracted_data in extracted_datas:
+                if not keywords or any([keyword in extracted_data for keyword in keywords]):
+                    full_url = base_url + extracted_data
+                    if IS_TEST_MODE:
+                        print("  [-] {}".format(full_url))
+                    else:
+                        if full_url not in LIST_PARSED_DATA:
+                            logging.info("Saving new url, and notifying rocketchat: '{}'".format(full_url))
+                            LIST_PARSED_DATA.append(full_url)
+                            notify_rocketchat(full_url)
+
     if not IS_TEST_MODE:
         logging.info("Saving everything back to DB: {}".format(DB_PATH))
         with open(DB_PATH, "wb") as f:
