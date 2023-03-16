@@ -16,11 +16,8 @@ LIST_PARSED_DATA = []
 USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; SAMSUNG SM-G930F Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/4.0 Chrome/44.0.2403.133 Mobile Safari/537.36"
 HEADERS = {"User-Agent": USER_AGENT}
 
-# https://docs.rocket.chat/use-rocket.chat/user-guides/user-panel/managing-your-account/personal-access-token
-userid = '<userid>'
-authtoken ='<token>'
-serverurl = 'https://localhost:3000'
-channel='<channel_name>'
+# Set the webhook URL
+webhook_url = "https://your-rocketchat-webhook-url.com"
 
 SEC_FEEDS = {
          # Example:
@@ -199,8 +196,12 @@ def setup_logger():
 
 def notify_rocketchat(url):
     if SHOULD_REPORT:
-        rocket = RocketChat(user_id= userid, auth_token= authtoken, server_url=serverurl,session=session)
-        resp = rocket.chat_post_message(url, channel=channel).json()
+        payload = {
+            "alias": "secfeed",
+            "text": url,
+        }
+        # Send the HTTP POST request to the webhook URL with the message payload in JSON format
+        resp = requests.post(webhook_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
         logging.debug("rocketchat responded: '{}'".format(resp))
 
 setup_logger()
