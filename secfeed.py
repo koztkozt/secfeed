@@ -150,7 +150,30 @@ SEC_FEEDS = {
             ("",
             r"(http://www.seebug.org/vuldb/ssvid-\d+)",
             None),            
+         
+        # https://www.cobaltstrike.com/blog/revisiting-the-udrl-part-1-simplifying-development/
+        "https://www.cobaltstrike.com/blog/":
+            ("https://www.cobaltstrike.com/blog/",
+            r"href\=\"https://www.cobaltstrike.com/blog/([^\"]+)\">R",
+            None),
 
+        # https://www.trustedsec.com/blog/red-vs-blue-kerberos-ticket-times-checksums-and-you/
+        "https://www.trustedsec.com/blog/":
+            ("https://www.trustedsec.com/blog/",
+            r"(?:<div class=\"post-title\">|<h2>)<a href\=\"https://www.trustedsec.com/blog/([^\"]+)\">",
+            None),
+			
+        # https://www.blackhillsinfosec.com/your-browser-is-not-a-safe-space/
+        "https://www.blackhillsinfosec.com/blog/":
+            ("https://www.blackhillsinfosec.com/blog/",
+            r"<h2 class=\"post-title entry-title\"><a href=\"https://www.blackhillsinfosec.com/([^\"]+)\">",
+            None),			
+			
+        # https://posts.specterops.io/
+        "https://posts.specterops.io/":
+            ("https://posts.specterops.io/",
+            r"value=\"https://posts.specterops.io/([^\"]+)\"",
+            None),			
 }
 
 SLEEP_TIME = 60 * 60 * 2 # 2 hours -+ 10-5000 seconds
