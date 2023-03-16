@@ -8,7 +8,7 @@ The script will query a list of websites and extract urls matching to specific r
 ![Screen Shot 2022-12-16 at 12 57 18](https://user-images.githubusercontent.com/519424/208083709-cf006e4e-3a79-4681-b45f-ebb6efc4e0ac.png)
 
 ## How to run
-- Edit `userid, authtoken, serverurl, channel`
+- Edit `webhook_url`
 - Use `IS_TEST_MODE` to test if it works
 - Use `SHOULD_REPORT` to send live notifications to the Slack channel
 - Run using: `python3 secfeed.py`
