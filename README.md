@@ -50,3 +50,7 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://blog.viettelcybersecurity.com
 - https://starlabs.sg/blog/
 - https://www.seebug.org
+- https://www.cobaltstrike.com/blog/
+- https://www.trustedsec.com/blog/
+- https://www.blackhillsinfosec.com/blog/
+- https://posts.specterops.io/
