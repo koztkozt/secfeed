@@ -13,7 +13,7 @@ from rocketchat_API.rocketchat import RocketChat
 
 DB_PATH = "secfeed.db"
 LIST_PARSED_DATA = []
-USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0; SAMSUNG SM-G930F Build/MMB29K) AppleWebKit/537.36 (KHTML, like Gecko) SamsungBrowser/4.0 Chrome/44.0.2403.133 Mobile Safari/537.36"
+USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/112.0.0.0 Safari/537.36"
 HEADERS = {"User-Agent": USER_AGENT}
 
 # Set the webhook URL
