@@ -177,6 +177,31 @@ SEC_FEEDS = {
             ("https://posts.specterops.io/",
             r"value=\"https://posts.specterops.io/([^\"]+)\"",
             None),			
+
+        # https://www.mdsec.co.uk/2023/03/exploiting-cve-2023-23397-microsoft-outlook-elevation-of-privilege-vulnerability/
+        "https://www.mdsec.co.uk/knowledge-centre/insights/":
+            ("https://www.mdsec.co.uk/",
+            r"href=\"https://www.mdsec.co.uk/(\d{4}/\d{2}/[^\"]+)\">",
+            None),	
+
+        # https://www.mandiant.com/resources/blog/3cx-software-supply-chain-compromise
+        "https://www.mandiant.com/resources/blog":
+            ("https://www.mandiant.com/resources/blog/",
+            r"href=\"https://www.mandiant.com/resources/blog/([^\"]+)\"",
+            None),	
+
+        # https://outflank.nl/blog/2023/03/28/attacking-visual-studio-for-initial-access/
+        "https://outflank.nl/blog/":
+            ("https://outflank.nl/blog/",
+            r"href=\"https://outflank.nl/blog/(\d{4}/\d{2}/\d{2}/[^\"]+)\" t",
+            None),	
+
+
+        # https://fortynorthsecurity.com/blog/extending-and-detecting-persistassist-act-ii/
+        "https://fortynorthsecurity.com/blog/":
+            ("https://fortynorthsecurity.com/blog/",
+            r"href=\"/blog/([^\"]+)\" class=\"post-title\"",
+            None),	
 }
 
 SLEEP_TIME = 60 * 60 * 2 # 2 hours -+ 10-5000 seconds
@@ -204,7 +229,7 @@ def notify_rocketchat(url):
         resp = requests.post(webhook_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
         logging.debug("rocketchat responded: '{}'".format(resp))
         time.sleep(0.5)
-        
+
 setup_logger()
 
 if not IS_TEST_MODE:
