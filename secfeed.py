@@ -202,6 +202,12 @@ SEC_FEEDS = {
             ("https://fortynorthsecurity.com/blog/",
             r"href=\"/blog/([^\"]+)\" class=\"post-title\"",
             None),	
+
+        # https://googleprojectzero.blogspot.com/2023/03/multiple-internet-to-baseband-remote-rce.html
+        "https://googleprojectzero.blogspot.com/":
+            ("https://googleprojectzero.blogspot.com/",
+            r"<li><a href='https://googleprojectzero.blogspot.com/(\d{4}/\d{2}/[^\"]+)\'>.*</a></li>",
+            None),	
 }
 
 SLEEP_TIME = 60 * 60 * 2 # 2 hours -+ 10-5000 seconds

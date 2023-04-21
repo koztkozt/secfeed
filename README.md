@@ -58,3 +58,4 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://www.mandiant.com/resources/blog
 - https://outflank.nl/blog/
 - https://fortynorthsecurity.com/blog/
+- https://googleprojectzero.blogspot.com/
