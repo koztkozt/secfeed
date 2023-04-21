@@ -54,3 +54,7 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://www.trustedsec.com/blog/
 - https://www.blackhillsinfosec.com/blog/
 - https://posts.specterops.io/
+- https://www.mdsec.co.uk/knowledge-centre/insights/
+- https://www.mandiant.com/resources/blog
+- https://outflank.nl/blog/
+- https://fortynorthsecurity.com/blog/
