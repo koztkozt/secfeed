@@ -245,33 +245,31 @@ if not IS_TEST_MODE:
 while True:
     logging.info("Getting data")
 
-    # rocketchat Connection pooling
-    with requests.sessions.Session() as session:
-        for sec_feed in SEC_FEEDS:
-            if IS_TEST_MODE:
-                print("--> {}".format(sec_feed))
+    for sec_feed in SEC_FEEDS:
+        if IS_TEST_MODE:
+            print("--> {}".format(sec_feed))
 
-            # Prepare
-            url_feed = sec_feed
-            # one keyword must be present
-            base_url, regex_str, keywords = SEC_FEEDS[url_feed]
-            # Get data
-            try:
-                data = requests.get(sec_feed, headers=HEADERS)
-            except Exception as e:
-                continue
-            # Extract
-            extracted_datas = re.findall(regex_str, data.text)
-            for extracted_data in extracted_datas:
-                if not keywords or any([keyword in extracted_data for keyword in keywords]):
-                    full_url = base_url + extracted_data
-                    if IS_TEST_MODE:
-                        print("  [-] {}".format(full_url))
-                    else:
-                        if full_url not in LIST_PARSED_DATA:
-                            logging.info("Saving new url, and notifying rocketchat: '{}'".format(full_url))
-                            LIST_PARSED_DATA.append(full_url)
-                            notify_rocketchat(full_url)
+        # Prepare
+        url_feed = sec_feed
+        # one keyword must be present
+        base_url, regex_str, keywords = SEC_FEEDS[url_feed]
+        # Get data
+        try:
+            data = requests.get(sec_feed, headers=HEADERS)
+        except Exception as e:
+            continue
+        # Extract
+        extracted_datas = re.findall(regex_str, data.text)
+        for extracted_data in extracted_datas:
+            if not keywords or any([keyword in extracted_data for keyword in keywords]):
+                full_url = base_url + extracted_data
+                if IS_TEST_MODE:
+                    print("  [-] {}".format(full_url))
+                else:
+                    if full_url not in LIST_PARSED_DATA:
+                        logging.info("Saving new url, and notifying rocketchat: '{}'".format(full_url))
+                        LIST_PARSED_DATA.append(full_url)
+                        notify_rocketchat(full_url)
 
     if not IS_TEST_MODE:
         logging.info("Saving everything back to DB: {}".format(DB_PATH))
