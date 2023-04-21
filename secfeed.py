@@ -203,7 +203,8 @@ def notify_rocketchat(url):
         # Send the HTTP POST request to the webhook URL with the message payload in JSON format
         resp = requests.post(webhook_url, data=json.dumps(payload), headers={'Content-Type': 'application/json'})
         logging.debug("rocketchat responded: '{}'".format(resp))
-
+        time.sleep(0.5)
+        
 setup_logger()
 
 if not IS_TEST_MODE:
