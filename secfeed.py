@@ -175,7 +175,7 @@ SEC_FEEDS = {
         # https://posts.specterops.io/
         "https://posts.specterops.io/":
             ("https://posts.specterops.io/",
-            r"value=\"https://posts.specterops.io/([^\"]+)\"",
+            r"value=\"https://posts.specterops.io/([^\"\?]+)\?",
             None),			
 
         # https://www.mdsec.co.uk/2023/03/exploiting-cve-2023-23397-microsoft-outlook-elevation-of-privilege-vulnerability/
