@@ -113,9 +113,9 @@ SEC_FEEDS = {
             None),
 
         # https://www.nozominetworks.com/blog/technical-analysis-of-the-winbox-payload-in-windigo/
-        "https://www.nozominetworks.com/labs/labs-blogs/" : 
-            ("https://www.nozominetworks.com/blog/", 
-            r"<a href\=\"https://www.nozominetworks.com/blog/([^\"]+)\" >", 
+        "https://www.nozominetworks.com/research-reports" : 
+            ("https://www.nozominetworks.com/resources/", 
+            r"href\=\"/resources/([^\"]+)\"", 
             None), 
 
         # https://www.armis.com/research/tlstorm/
@@ -157,13 +157,13 @@ SEC_FEEDS = {
         # https://www.cobaltstrike.com/blog/revisiting-the-udrl-part-1-simplifying-development/
         "https://www.cobaltstrike.com/blog/":
             ("https://www.cobaltstrike.com/blog/",
-            r"href\=\"https://www.cobaltstrike.com/blog/([^\"]+)\">R",
+            r"href\=\"https://www.cobaltstrike.com/blog/([^\"]+)\">",
             None),
 
-        # https://www.trustedsec.com/blog/red-vs-blue-kerberos-ticket-times-checksums-and-you/
-        "https://www.trustedsec.com/blog/":
-            ("https://www.trustedsec.com/blog/",
-            r"(?:<div class=\"post-title\">|<h2>)<a href\=\"https://www.trustedsec.com/blog/([^\"]+)\">",
+        # https://trustedsec.com/blog/the-triforce-of-initial-access
+        "https://trustedsec.com/blog/":
+            ("https://trustedsec.com/blog/",
+            r"data-href\=\"https://trustedsec.com/blog/([^\"]+)\"",
             None),
 			
         # https://www.blackhillsinfosec.com/your-browser-is-not-a-safe-space/
@@ -207,7 +207,31 @@ SEC_FEEDS = {
         "https://googleprojectzero.blogspot.com/":
             ("https://googleprojectzero.blogspot.com/",
             r"<li><a href='https://googleprojectzero.blogspot.com/(\d{4}/\d{2}/[^\"]+)\'>.*</a></li>",
-            None),	
+            None),
+
+        # https://medium.com/@mitrecaldera/deconstructing-a-defense-evasion-adversary-with-mitre-caldera-dc8604664aa0
+        "https://medium.com/@mitrecaldera/":
+            ("https://medium.com/@mitrecaldera/",
+            r"href=\"/@mitrecaldera/(?!followers)(?!about)([^\"]+)(?=\?)",
+            None),
+
+        # https://whiteknightlabs.com/2023/08/02/flipper-zero-and-433mhz-hacking-part-1/
+        "https://whiteknightlabs.com/blog/":
+            ("https://whiteknightlabs.com/",
+            r"href=\"https://whiteknightlabs.com/(\d{4}/\d{2}/\d{2}/[^\"]+)\"",
+            None),
+
+        # https://blog.nviso.eu/2023/11/08/ai-in-cybersecurity-bridging-the-gap-between-imagination-and-reality/
+        "https://blog.nviso.eu":
+            ("https://blog.nviso.eu/",
+            r"href=\"https://blog.nviso.eu/(\d{4}/\d{2}/\d{2}/[^\"]+)\"",
+            None),
+
+        # https://shorsec.io/blog/dll-notification-injection/
+        "https://shorsec.io/blog/":
+            ("https://shorsec.io/blog/",
+            r"href=\"https://shorsec.io/blog/(?!tag/)(?!page/)([^\"]+)\"",
+            None),
 }
 
 SLEEP_TIME = 60 * 60 * 2 # 2 hours -+ 10-5000 seconds
@@ -249,6 +273,7 @@ if not IS_TEST_MODE:
         pass
 
 while True:
+    previous_full_url = ""
     logging.info("Getting data")
 
     for sec_feed in SEC_FEEDS:
@@ -269,13 +294,17 @@ while True:
         for extracted_data in extracted_datas:
             if not keywords or any([keyword in extracted_data for keyword in keywords]):
                 full_url = base_url + extracted_data
-                if IS_TEST_MODE:
-                    print("  [-] {}".format(full_url))
+                if full_url == previous_full_url:
+                    continue
                 else:
-                    if full_url not in LIST_PARSED_DATA:
-                        logging.info("Saving new url, and notifying rocketchat: '{}'".format(full_url))
-                        LIST_PARSED_DATA.append(full_url)
-                        notify_rocketchat(full_url)
+                    previous_full_url = full_url
+                    if IS_TEST_MODE:
+                        print("  [-] {}".format(full_url))
+                    else:                          
+                        if full_url not in LIST_PARSED_DATA:
+                            logging.info("Saving new url, and notifying rocketchat: '{}'".format(full_url))
+                            LIST_PARSED_DATA.append(full_url)
+                            notify_rocketchat(full_url)
 
     if not IS_TEST_MODE:
         logging.info("Saving everything back to DB: {}".format(DB_PATH))

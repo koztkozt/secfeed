@@ -59,3 +59,7 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://outflank.nl/blog/
 - https://fortynorthsecurity.com/blog/
 - https://googleprojectzero.blogspot.com/
+- https://medium.com/@mitrecaldera/
+- https://blog.nviso.eu/
+- https://shorsec.io/blog/
+- https://whiteknightlabs.com/blog/
