@@ -63,3 +63,4 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://blog.nviso.eu/
 - https://shorsec.io/blog/
 - https://whiteknightlabs.com/blog/
+- https://xl-sec.github.io/AppSecEzine/latest.rss
