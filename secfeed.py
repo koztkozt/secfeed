@@ -232,6 +232,12 @@ SEC_FEEDS = {
             ("https://shorsec.io/blog/",
             r"href=\"https://shorsec.io/blog/(?!tag/)(?!page/)([^\"]+)\"",
             None),
+
+        # https://xl-sec.github.io/AppSecEzine/latest.rss
+        "https://xl-sec.github.io/AppSecEzine/latest.rss":
+            ("",
+            r"<link>(.*)</link>",
+            None)
 }
 
 SLEEP_TIME = 60 * 60 * 2 # 2 hours -+ 10-5000 seconds
