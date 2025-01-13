@@ -65,7 +65,6 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://whiteknightlabs.com/blog/
 - https://xl-sec.github.io/AppSecEzine/latest.rss
 - https://www.nccgroup.com/us/research-blog/
-- https://www.mdsec.co.uk/
 - https://www.elastic.co/security-labs/
 - https://www.attackiq.com/blog/
 - https://www.cisa.gov/news-events/cybersecurity-advisories

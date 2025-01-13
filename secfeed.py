@@ -245,12 +245,6 @@ SEC_FEEDS = {
             r"href=\"\/en\/cyber-labs\/([^\"]+)\"",
             None),
 
-        # https://www.mdsec.co.uk/2024/12/extracting-account-connectivity-credentials-accs-from-symantec-management-agent-aka-altiris/
-        "https://www.mdsec.co.uk/knowledge-centre/insights/":
-            ("https://www.mdsec.co.uk/",
-            r"href=\"https:\/\/www\.mdsec\.co\.uk\/(\d{4}\/\d{2}\/[^\"]+)",
-            None),
-
         # https://www.elastic.co/security-labs/detonating-beacons-to-illuminate-detection-gaps
         "https://www.elastic.co/security-labs":
             ("https://www.elastic.co/security-labs/",
