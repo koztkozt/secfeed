@@ -64,3 +64,11 @@ Simply because many blogs/vendors are not supporting any form of push notificati
 - https://shorsec.io/blog/
 - https://whiteknightlabs.com/blog/
 - https://xl-sec.github.io/AppSecEzine/latest.rss
+- https://www.nccgroup.com/us/research-blog/
+- https://www.mdsec.co.uk/
+- https://www.elastic.co/security-labs/
+- https://www.attackiq.com/blog/
+- https://www.cisa.gov/news-events/cybersecurity-advisories
+- https://cloud.google.com/blog/topics/threat-intelligence/
+- https://news.sophos.com/en-us/category/security-operations/feed/
+- https://www.zscaler.com/blogs?type=security-research

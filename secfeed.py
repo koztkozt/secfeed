@@ -237,6 +237,59 @@ SEC_FEEDS = {
         "https://xl-sec.github.io/AppSecEzine/latest.rss":
             ("",
             r"<link>(.*)</link>",
+            None),
+
+        # https://www.lrqa.com/en/cyber-labs/binary-ninja-plugin/
+        "https://www.lrqa.com/en/cyber-labs/":
+            ("https://www.lrqa.com/en/cyber-labs/",
+            r"href=\"\/en\/cyber-labs\/([^\"]+)\"",
+            None),
+
+        # https://www.mdsec.co.uk/2024/12/extracting-account-connectivity-credentials-accs-from-symantec-management-agent-aka-altiris/
+        "https://www.mdsec.co.uk/knowledge-centre/insights/":
+            ("https://www.mdsec.co.uk/",
+            r"href=\"https:\/\/www\.mdsec\.co\.uk\/(\d{4}\/\d{2}\/[^\"]+)",
+            None),
+
+        # https://www.elastic.co/security-labs/detonating-beacons-to-illuminate-detection-gaps
+        "https://www.elastic.co/security-labs":
+            ("https://www.elastic.co/security-labs/",
+            r"href=\"\/security-labs\/([^\/\.\"]+)\"",
+            None),
+
+        # https://www.attackiq.com/2025/01/09/emulating-ako-ransomware/
+        "https://www.attackiq.com/blog/":
+            ("https://www.attackiq.com/",
+            r"href=\"https:\/\/www\.attackiq\.com\/(\d{4}/\d{2}/\d{2}/[^\"]+)\"",
+            None),
+
+        # https://www.cisa.gov/news-events/cybersecurity-advisories/aa24-326a
+        "https://www.cisa.gov/news-events/cybersecurity-advisories?f%5B0%5D=advisory_type%3A94":
+            ("https://www.cisa.gov/news-events/cybersecurity-advisories/",
+            r"href=\"\/news-events\/cybersecurity-advisories\/([^\/\.\"]+)\"",
+            None),
+        # https://www.cisa.gov/news-events/analysis-reports/ar24-038a
+        "https://www.cisa.gov/news-events/cybersecurity-advisories?f%5B0%5D=advisory_type%3A65":
+            ("https://www.cisa.gov/news-events/analysis-reports",
+            r"href=\"\/news-events\/analysis-reports\/([^\/\.\"]+)\"",
+            None),
+
+        # https://cloud.google.com/blog/topics/threat-intelligence/ivanti-connect-secure-vpn-zero-day/
+        "https://feeds.feedburner.com/threatintelligence/pvexyqv7v0v":
+            ("https://cloud.google.com/blog/topics/threat-intelligence/",
+            r"<link>https://cloud.google.com/blog/topics/threat-intelligence/([^\>]+)</link>",
+            None),
+
+        # https://news.sophos.com/en-us/2024/12/19/phishing-platform-rockstar-2fa-trips-and-flowerstorm-picks-up-the-pieces/
+        "https://news.sophos.com/en-us/category/security-operations/feed/":
+            ("https://news.sophos.com/en-us/",
+            r"<link>https://news.sophos.com/en-us/([^\>]+)</link>",
+            None),
+
+        # https://www.zscaler.com/blogs/security-research/threatlabz-report-threats-delivered-over-encrypted-channels
+        "https://www.zscaler.com/blogs?type=security-research":
+            ("https://www.zscaler.com/blogs/security-research/",
+            r"href=\"/blogs/security-research/([^\/\.\"]+)\"",
             None)
 }
 
