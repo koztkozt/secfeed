@@ -96,9 +96,9 @@ SEC_FEEDS = {
             None),
         
         # https://research.nccgroup.com/category/technical-advisory/
-        "https://research.nccgroup.com/category/technical-advisory/":
-            ("https://research.nccgroup.com/",
-            r"\"https://research.nccgroup.com/(\d+/\d+/\d+/[^\"]+)\"",
+        "https://www.nccgroup.com/us/research-blog/":
+            ("https://www.nccgroup.com/us/research-blog/",
+            r"href=\"/us/research-blog/([^\"]+)\"",
             None),
 
         # https://ssd-disclosure.com/apple-safari-javascriptcore-inspector-type-confusion/
@@ -185,15 +185,15 @@ SEC_FEEDS = {
             None),	
 
         # https://www.mandiant.com/resources/blog/3cx-software-supply-chain-compromise
-        "https://www.mandiant.com/resources/blog":
-            ("https://www.mandiant.com/resources/blog/",
-            r"href=\"https://www.mandiant.com/resources/blog/([^\"]+)\"",
-            None),	
+        #"https://www.mandiant.com/resources/blog":
+        #    ("https://www.mandiant.com/resources/blog/",
+        #    r"href=\"https://www.mandiant.com/resources/blog/([^\"]+)\"",
+        #    None),	
 
         # https://outflank.nl/blog/2023/03/28/attacking-visual-studio-for-initial-access/
         "https://outflank.nl/blog/":
             ("https://outflank.nl/blog/",
-            r"href=\"https://outflank.nl/blog/(\d{4}/\d{2}/\d{2}/[^\"]+)\" t",
+            r"href=\"https://www.outflank.nl/blog/(\d{4}/\d{2}/\d{2}/[^\"]+)",
             None),	
 
 
@@ -206,7 +206,7 @@ SEC_FEEDS = {
         # https://googleprojectzero.blogspot.com/2023/03/multiple-internet-to-baseband-remote-rce.html
         "https://googleprojectzero.blogspot.com/":
             ("https://googleprojectzero.blogspot.com/",
-            r"<li><a href='https://googleprojectzero.blogspot.com/(\d{4}/\d{2}/[^\"]+)\'>.*</a></li>",
+            r"<li><a href='https://googleprojectzero.blogspot.com/(\d{4}/\d{2}/[^\"\>]+)\'",
             None),
 
         # https://medium.com/@mitrecaldera/deconstructing-a-defense-evasion-adversary-with-mitre-caldera-dc8604664aa0
