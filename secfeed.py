@@ -185,10 +185,10 @@ SEC_FEEDS = {
             None),	
 
         # https://www.mandiant.com/resources/blog/3cx-software-supply-chain-compromise
-        #"https://www.mandiant.com/resources/blog":
-        #    ("https://www.mandiant.com/resources/blog/",
-        #    r"href=\"https://www.mandiant.com/resources/blog/([^\"]+)\"",
-        #    None),	
+        "https://www.mandiant.com/resources/blog":
+            ("https://www.mandiant.com/resources/blog/",
+            r"href=\"https://www.mandiant.com/resources/blog/([^\"]+)\"",
+            None),	
 
         # https://outflank.nl/blog/2023/03/28/attacking-visual-studio-for-initial-access/
         "https://outflank.nl/blog/":
